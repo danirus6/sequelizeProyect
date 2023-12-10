@@ -1,9 +1,10 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "database_development",
+    "password": "Hellelo12343",
+    "database": "databaseSequelize",
     "host": "127.0.0.1",
+    "port": "6666",
     "dialect": "mysql"
   },
   "test": {
