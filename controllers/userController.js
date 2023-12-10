@@ -11,6 +11,8 @@ const UserController = {
         res.status(500).send('Error al crear usuario');
       });
   },
+  //ADD MORE METHODS HERE
+  
 };
 
 module.exports = UserController;
