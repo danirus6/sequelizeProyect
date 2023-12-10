@@ -15,7 +15,17 @@ const ProductOrderController = {
         console.error(error);
         res.status(500).send('Error al crear relación');
       });
+      
   },
+  findAll(req, res) {
+    // Puedes personalizar la lógica según tus necesidades
+    ProductsOrder.findAll()
+      .then(productOrders => res.status(200).json(productOrders))
+      .catch(error => {
+        console.error(error);
+        res.status(500).send('Error al obtener relaciones');
+      });
+    },
 };
 
 module.exports = ProductOrderController;

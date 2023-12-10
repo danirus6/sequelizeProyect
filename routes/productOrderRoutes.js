@@ -5,4 +5,6 @@ const ProductOrderController = require('../controllers/productOrderController');
 // Ruta para la creación de la relación M:N entre Product y Order
 router.post('/create', ProductOrderController.create);
 
+router.get('/findAll', ProductOrderController.findAll);
+
 module.exports = router;
