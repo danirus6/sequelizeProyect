@@ -6,4 +6,6 @@ sequelize model:generate --name Order --attributes orderDate:date,totalAmount:de
 
 sequelize model:generate --name Category --attributes categoryName:string,description:string
 
+sequelize model:generate --name ProductsOrder --attributes quantity:integer
+
 sequelize db:migrate
