@@ -14,7 +14,7 @@ module.exports = {
     */
     await queryInterface.bulkInsert('Products', [
       {
-        productName: 'Product A',
+        productName: 'ProductA',
         price: 19.99,
         categoryId: 1, 
         createdAt: new Date(),

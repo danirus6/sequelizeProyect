@@ -16,10 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
       });
       Order.belongsToMany(models.Product, {
-        through: 'ProductsOrder',
-        foreignKey: 'orderId',
-        onDelete: 'CASCADE',
-      });
+        through: 'ProductsOrder'});
     }
   }
   Order.init({

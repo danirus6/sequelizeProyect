@@ -4,5 +4,6 @@ const ProductController = require('../controllers/productController');
 
 // Ruta para la creación de productos
 router.post('/create', ProductController.create);
+router.get('/getAll', ProductController.findAll);
 
 module.exports = router;

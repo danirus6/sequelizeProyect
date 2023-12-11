@@ -1,6 +1,16 @@
 const { Product } = require('../models/index.js');
 
 const ProductController = {
+  findAll(req, res) {
+    // Puedes personalizar la lógica según tus necesidades
+    Product.findAll()
+      .then(Product => res.status(200).json(Product))
+      .catch(error => {
+        console.error(error);
+        res.status(500).send('Error al obtener relaciones');
+      });
+    },
+  
   create(req, res) {
     const { productName, price, categoryId } = req.body;
 

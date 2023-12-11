@@ -20,7 +20,7 @@ module.exports = {
         role: 'user',
         createdAt: new Date(),
         updatedAt: new Date(),
-
+        
       },
     ],{});
   },

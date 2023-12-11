@@ -11,6 +11,7 @@ findAll(req, res) {
       });
     },
   create(req, res) {
+    //FALTA EL ENCRIPTADO
     req.body.role = "user";
 
     User.create(req.body)
