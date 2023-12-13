@@ -1,6 +1,14 @@
 const { Category } = require('../models/index.js');
 
 const CategoryController = {
+
+
+  //   CRUD Categorías
+  //   El endpoint para ver todas las categorías junto a los productos que tienen
+  // Crea un endpoint que devuelva una categoría por id
+  // Filtro para buscar categoría por nombre
+
+
   create(req, res) {
     const { categoryName, description } = req.body;
 
