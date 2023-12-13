@@ -1,4 +1,4 @@
-const { Product } = require('../models/index.js');
+const { Product, Category } = require('../models/index.js');
 
 const ProductController = {
   //   CRUD productos
@@ -24,6 +24,45 @@ const ProductController = {
         res.status(500).send('Error al obtener relaciones');
       });
   },
+  findById(req, res) {
+    // Puedes personalizar la lógica según tus necesidades
+    Product.findByPk(req.params.id)
+      .then(Product => res.status(200).json(Product))
+      .catch(error => {
+        console.error(error);
+        res.status(500).send('Error al obtener relaciones');
+      });
+  },
+  findByName(req, res) {
+    // Puedes personalizar la lógica según tus necesidades
+    Product.findByName(req.params.productName)
+      .then(Product => res.status(200).json(Product))
+      .catch(error => {
+        console.error(error);
+        res.status(500).send('Error al obtener relaciones');
+      });
+  },
+  findByPrice(req, res) {
+    // Puedes personalizar la lógica según tus necesidades
+    Product.findByPrice(req.params.price)
+      .then(Product => res.status(200).json(Product))
+      .catch(error => {
+        console.error(error);
+        res.status(500).send('Error al obtener relaciones');
+      });
+  },
+
+  async getAll(req, res) {
+    try {
+      const Product = await Product.findAll({
+        include: [{ model: Category, attributes: ["categoryName"], through: { attributes: [] } }],
+      });
+      res.send(orders);
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
 
   create(req, res) {
     const { productName, price, categoryId } = req.body;
