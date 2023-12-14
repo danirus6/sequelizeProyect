@@ -2,6 +2,10 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
+
+// Middleware para parsear JSON
+app.use(express.json());
+
 // Conectar las rutas
 app.use('/users', require('./routes/userRoutes'));
 app.use('/products', require('./routes/productRoutes'));

@@ -6,6 +6,8 @@ router.get('/getAllUsers', UserController.findAll);
 
 // Ruta para el formulario de registro
 router.post('/register', UserController.create);
+router.post('/login',UserController.login)
+router.delete('/delete/:id', UserController.deleteUser);
 
 // router.post('/login', UserController.login);
 module.exports = router;

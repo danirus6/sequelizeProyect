@@ -1,4 +1,7 @@
-const { User } = require('../models/index.js');
+const { User, Post, Token } = require('../models/index.js');
+const bcrypt = require ('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { jwt_secret } = require('../config/config.json')['development']
 
 const UserController = {
   // Endpoint para registrar un usuario utilizando bcrypt
@@ -11,22 +14,60 @@ const UserController = {
   findAll(req, res) {
     // Puedes personalizar la lógica según tus necesidades
     User.findAll()
-      .then(User => res.status(200).json(User))
+      .then(user => res.status(200).json(user))
       .catch(error => {
         console.error(error);
         res.status(500).send('Error al obtener relaciones');
       });
   },
+
   create(req, res) {
     //FALTA EL ENCRIPTADO
     req.body.role = "user";
-
-    User.create(req.body)
+    const password = bcrypt.hashSync(req.body.password,10)
+    User.create({...req.body,password:password})
       .then(user => res.status(201).send({ message: 'Usuario creado con éxito', user }))
       .catch(error => {
         console.error(error);
         res.status(500).send('Error al crear usuario');
       });
+  },
+    login(req,res){
+        User.findOne({
+            where:{
+                email:req.body.email
+            }
+        }).then(user=>{
+            if(!user){
+                return res.status(400).send({message:"Usuario o contraseña incorrectos"})
+            }
+            const isMatch = bcrypt.compareSync(req.body.password, user.password);
+            if(!isMatch){
+                return res.status(400).send({message:"Usuario o contraseña incorrectos"})
+            }
+            let token = jwt.sign({ id: user.id }, jwt_secret);
+ 			Token.create({ token, UserId: user.id });
+            res.send({ message: 'Bienvenid@' + user.name, user, token });
+        })
+
+    },
+    async deleteUser(req, res) {
+    const userId = req.params.id;
+
+    try {
+      const user = await User.findByPk(userId);
+
+      if (!user) {
+        return res.status(404).send('Usuario no encontrado');
+      }
+
+      await user.destroy();
+
+      res.status(200).send('Usuario eliminado con éxito');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error al eliminar usuario');
+    }
   },
 
   //ADD MORE METHODS HERE
