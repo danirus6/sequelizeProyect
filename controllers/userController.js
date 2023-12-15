@@ -20,18 +20,28 @@ const UserController = {
         res.status(500).send('Error al obtener relaciones');
       });
   },
+create(req, res) {
+  const { name, email, password, role } = req.body;
 
-  create(req, res) {
-    //FALTA EL ENCRIPTADO
-    req.body.role = "user";
-    const password = bcrypt.hashSync(req.body.password,10)
-    User.create({...req.body,password:password})
-      .then(user => res.status(201).send({ message: 'Usuario creado con éxito', user }))
-      .catch(error => {
-        console.error(error);
-        res.status(500).send('Error al crear usuario');
-      });
-  },
+  if (!name || !email || !password) {
+    return res.status(400).send('Faltan datos obligatorios');
+  }
+
+  const hashedPassword = req.body.password ? bcrypt.hashSync(req.body.password, 10) : undefined;
+
+  if (hashedPassword === undefined) {
+    return res.status(400).send('La contraseña es requerida');
+  }
+
+  User.create({ name, email, password: hashedPassword, role })
+    .then(user => res.status(201).send({ message: 'Usuario creado con éxito', user }))
+    .catch(error => {
+      console.error(error);
+      res.status(500).send('Error al crear usuario');
+    });
+},
+
+
     login(req,res){
         User.findOne({
             where:{
