@@ -1,16 +1,7 @@
 const { Product, Category } = require('../models/index.js');
 const { Op } = require('sequelize');
 const ProductController = {
-  //   CRUD productos
-  // Endpoint para crear un producto
-  // Endpoint para actualizar un producto
-  // Endpoint para eliminar un producto
-  // El endpoint de traer productos debe mostrarse junto a la categoría o categorías que pertenece
-  // Endpoint que traiga un producto por su id
-  // Filtro para buscar producto por nombre
-  // Filtro para buscar producto por precio
-  // Filtro que ordene los productos de mayor a menor precio
-  // Implementa validación a la hora de crear un producto para que se rellene todos los campos y si no se hace que devuelva un mensaje
+  
   // Solo podrás crear, actualizar y eliminar productos si estás autenticado.
 
 
@@ -21,7 +12,7 @@ const ProductController = {
     .then(products => res.status(200).json(products))
     .catch(error => {
       console.error(error);
-      res.status(500).json({ error: error.message }); // Muestra el mensaje de error
+      res.status(500).json({ error: error.message }); 
     });
 },
 
@@ -65,9 +56,6 @@ const ProductController = {
       res.status(500).send('Error al obtener productos por precio');
     });
 },
-
-  
-
  async getAllWithCategory(req, res) {
     try {
       const productsWithCategories = await Product.findAll({
@@ -100,7 +88,10 @@ async getAllOrdered(req, res) {
   create(req, res) {
     const { productName, price, categoryId } = req.body;
 
-    // Puedes personalizar la lógica según tus necesidades
+     if (!productName || !price || !categoryId) {
+    return res.status(400).send('Faltan datos obligatorios para crear el producto');
+  }
+
     Product.create({
       productName,
       price,
