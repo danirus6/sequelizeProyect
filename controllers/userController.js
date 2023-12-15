@@ -79,7 +79,23 @@ create(req, res) {
       res.status(500).send('Error al eliminar usuario');
     }
   },
-
+  
+  async logout(req, res) {
+        try {
+            await Token.destroy({
+                where: {
+                    [Op.and]: [
+                        { UserId: req.user.id },
+                        { token: req.headers.authorization }
+                    ]
+                }
+            });
+            res.send({ message: 'Desconectado con éxito' })
+        } catch (error) {
+            console.log(error)
+            res.status(500).send({ message: 'hubo un problema al tratar de desconectarte' })
+        }
+    }
   //ADD MORE METHODS HERE
 
 };

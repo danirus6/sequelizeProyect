@@ -21,13 +21,15 @@ const OrderController = {
 
     const { orderDate, totalAmount, userId } = req.body;
 
-    // Puedes personalizar la lógica según tus necesidades
     Order.create({
       orderDate,
       totalAmount,
       userId,
     })
-      .then(order => res.status(201).send({ message: 'Orden creada con éxito', order }))
+      .then(order => {
+        order.addProduct(req.body.productId)
+        res.status(201).send({ message: 'Orden creada con éxito', order })
+      })      
       .catch(error => {
         console.error(error);
         res.status(500).send('Error al crear orden');
