@@ -6,12 +6,40 @@ module.exports = {
 
     await queryInterface.bulkInsert('Products', [
       {
-        productName: 'ProductA',
-        price: 19.99,
-        categoryId: 1, 
+        productName: 'Steam',
+        price: 200,
+        categoryID: 1,
         createdAt: new Date(),
-        updatedAt: new Date(),
-      },
+        upDatedAt: new Date()
+    },
+    {
+        productName: 'Playstation',
+        price: 300,
+        categoryID: 2,
+        createdAt: new Date(),
+        upDatedAt: new Date()
+    },
+    {
+        productName: 'Nintendo',
+        price: 100,
+        categoryID: 2,
+        createdAt: new Date(),
+        upDatedAt: new Date()
+    },
+    {
+        productName: 'Microsoft',
+        price: 350,
+        categoryID: 2,
+        createdAt: new Date(),
+        upDatedAt: new Date()
+    },
+    {
+        productName: 'Percha',
+        price: 3,
+        categoryID: 1,
+        createdAt: new Date(),
+        upDatedAt: new Date()
+    }
       ], {});
   },
 
