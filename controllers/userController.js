@@ -1,16 +1,35 @@
-const { User, Post, Token } = require('../models/index.js');
+const { User, Post, Token, Sequelize,Order, Product } = require('../models/index.js');
 const bcrypt = require ('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { jwt_secret } = require('../config/config.json')['development']
-
+const {Op} = Sequelize;
 const UserController = {
   // Endpoint que nos traiga la información del usuario conectado junto a los pedidos que tiene y los productos que contiene cada pedido
 
+ async getUserInfo(req, res) {
+    try {
+      const userInfo = await User.findByPk(req.user.id, {
+        include: [
+          {
+            model: Order,
+            include: [Product],
+          },
+        ],
+      });
 
+      if (!userInfo) {
+        return res.status(404).json({ message: 'Usuario no encontrado o no tiene datos relacionados.' });
+      }
+
+      res.json(userInfo);
+    } catch (error) {
+      console.error('Error al obtener información del usuario:', error);
+      res.status(500).json({ message: 'Error al obtener información del usuario.' });
+    }
+  },
 
 
   findAll(req, res) {
-    // Puedes personalizar la lógica según tus necesidades
     User.findAll()
       .then(user => res.status(200).json(user))
       .catch(error => {
@@ -38,8 +57,6 @@ create(req, res) {
       res.status(500).send('Error al crear usuario');
     });
 },
-
-
     login(req,res){
         User.findOne({
             where:{
@@ -54,7 +71,7 @@ create(req, res) {
                 return res.status(400).send({message:"Usuario o contraseña incorrectos"})
             }
             let token = jwt.sign({ id: user.id }, jwt_secret);
- 			Token.create({ token, UserId: user.id });
+ 			      Token.create({ token, UserId: user.id });
             res.send({ message: 'Bienvenid@' + user.name, user, token });
         })
 

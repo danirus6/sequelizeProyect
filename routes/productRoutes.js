@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const ProductController = require('../controllers/productController');
+const {authentication} = require('../middlewares/authentication')
 
 // Ruta para la creación de productos
-router.post('/create', ProductController.create);
+router.post('/create', authentication,ProductController.create);
+router.put('/update/:id', authentication, ProductController.update);
+router.delete('/delete/:id', authentication, ProductController.delete);
+
 router.get('/getAll', ProductController.getAll);
 router.get('/:id', ProductController.findById);
 router.get('/getAllWithCategory', ProductController.getAllWithCategory)

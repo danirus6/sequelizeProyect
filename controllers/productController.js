@@ -2,12 +2,7 @@ const { Product, Category } = require('../models/index.js');
 const { Op } = require('sequelize');
 const ProductController = {
   
-  // Solo podrás crear, actualizar y eliminar productos si estás autenticado.
-
-
-
   getAll(req, res) {
-  // Puedes personalizar la lógica según tus necesidades
   Product.findAll()
     .then(products => res.status(200).json(products))
     .catch(error => {
@@ -17,7 +12,6 @@ const ProductController = {
 },
 
   findById(req, res) {
-    // Puedes personalizar la lógica según tus necesidades
     Product.findByPk(req.params.id)
       .then(product => res.status(200).json(product))
       .catch(error => {
@@ -31,7 +25,7 @@ const ProductController = {
   Product.findAll({
     where: {
       productName: {
-        [Op.like]: `%${productName}%` // Búsqueda por nombre parcial
+        [Op.like]: `%${productName}%` 
       }
     }
   })
@@ -47,7 +41,7 @@ const ProductController = {
 
   Product.findAll({
     where: {
-      price: parseFloat(price), // Asegúrate de manejar adecuadamente el tipo de dato de tu precio en la base de datos
+      price: parseFloat(price),
     },
   })
     .then(products => res.status(200).json(products))
@@ -88,6 +82,9 @@ async getAllOrdered(req, res) {
   create(req, res) {
     const { productName, price, categoryId } = req.body;
 
+    // if (!req.user) {
+    //   return res.status(401).send('No estás autenticado');
+    // }
      if (!productName || !price || !categoryId) {
     return res.status(400).send('Faltan datos obligatorios para crear el producto');
   }
@@ -103,6 +100,61 @@ async getAllOrdered(req, res) {
         res.status(500).send('Error al crear producto');
       });
   },
+
+  update(req, res) {
+    
+
+    const productId = req.params.id;
+    const { productName, price, categoryId } = req.body;
+
+    Product.findByPk(productId)
+      .then(product => {
+        if (!product) {
+          return res.status(404).send('Producto no encontrado');
+        }
+
+        // if (product.userId !== req.user.id) {
+        //   return res.status(403).send('No tienes permisos para actualizar este producto');
+        // }
+
+        return product.update({
+          productName,
+          price,
+          categoryId,
+        });
+      })
+      .then(updatedProduct => res.status(200).send({ message: 'Producto actualizado con éxito', updatedProduct }))
+      .catch(error => {
+        console.error(error);
+        res.status(500).send('Error al actualizar producto');
+      });
+  },
+
+  delete(req, res) {
+    // if (!req.user) {
+    //   return res.status(401).send('No estás autenticado');
+    // }
+    const productId = req.params.id;
+
+    Product.findByPk(productId)
+      .then(product => {
+        if (!product) {
+          return res.status(404).send('Producto no encontrado');
+        }
+
+        // if (product.userId !== req.user.id) {
+        //   return res.status(403).send('No tienes permisos para eliminar este producto');
+        // }
+
+        return product.destroy();
+      })
+      .then(() => res.status(200).send({ message: 'Producto eliminado con éxito' }))
+      .catch(error => {
+        console.error(error);
+        res.status(500).send('Error al eliminar producto');
+      });
+  },
+
 };
 
 module.exports = ProductController;

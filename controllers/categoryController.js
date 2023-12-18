@@ -4,16 +4,10 @@ const { Op } = require('sequelize');
 const CategoryController = {
 
 
-  //   CRUD Categorías
-  //   El endpoint para ver todas las categorías junto a los productos que tienen
-  // Crea un endpoint que devuelva una categoría por id
-  // Filtro para buscar categoría por nombre
-
-
   create(req, res) {
     const { categoryName, description } = req.body;
 
-    // Puedes personalizar la lógica según tus necesidades
+    
     Category.create({
       categoryName,
       description,
@@ -41,7 +35,6 @@ const CategoryController = {
   },
 
   findById(req, res) {
-    // Puedes personalizar la lógica según tus necesidades
     Category.findByPk(req.params.id)
       .then(category => res.status(200).json(category))
       .catch(error => {
@@ -55,7 +48,7 @@ findByName(req, res) {
   Category.findAll({
     where: {
       categoryName: {
-        [Op.like]: `%${categoryName}%` // Búsqueda por nombre parcial
+        [Op.like]: `%${categoryName}%` 
       }
     }
   })

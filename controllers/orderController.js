@@ -7,15 +7,12 @@ const OrderController = {
       const orders = await Order.findAll({
         include: [{ model: Product, attributes: ["productName"], through: { attributes: [] } }],
 
-        //   include: [{ model: Product, attributes: ["productName"] }],
-        //   exclude: [{ model: ProductsOrder, attributes: ["ProductsOrder"] }]
       });
       res.send(orders);
     } catch (error) {
       console.error(error);
     }
   },
-
 
   create(req, res) {
 
