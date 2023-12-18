@@ -10,7 +10,7 @@ module.exports = {
       password: 'hereisJohnny',
       role: 'user',
       createdAt: new Date(),
-      upDatedAt: new Date()
+      updatedAt: new Date()
     },
     {
       name: 'Sue',
@@ -18,7 +18,7 @@ module.exports = {
       password: 'notPeggy',
       role: 'user',
       createdAt: new Date(),
-      upDatedAt: new Date()
+      updatedAt: new Date()
     },
     ],{});
   },

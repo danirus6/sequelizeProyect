@@ -16,7 +16,7 @@ module.exports = {
       totalAmount: 500,
       userId: 2,
       createdAt: new Date(),
-      upDatedAt: new Date()
+      updatedAt: new Date()
     },
     ], {});
   },

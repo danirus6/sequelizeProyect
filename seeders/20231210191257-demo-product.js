@@ -10,35 +10,35 @@ module.exports = {
         price: 200,
         categoryID: 1,
         createdAt: new Date(),
-        upDatedAt: new Date()
+        updatedAt: new Date()
     },
     {
         productName: 'Playstation',
         price: 300,
         categoryID: 2,
         createdAt: new Date(),
-        upDatedAt: new Date()
+        updatedAt: new Date()
     },
     {
         productName: 'Nintendo',
         price: 100,
         categoryID: 2,
         createdAt: new Date(),
-        upDatedAt: new Date()
+        updatedAt: new Date()
     },
     {
         productName: 'Microsoft',
         price: 350,
         categoryID: 2,
         createdAt: new Date(),
-        upDatedAt: new Date()
+        updatedAt: new Date()
     },
     {
         productName: 'Percha',
         price: 3,
         categoryID: 1,
         createdAt: new Date(),
-        upDatedAt: new Date()
+        updatedAt: new Date()
     }
       ], {});
   },
