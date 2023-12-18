@@ -13,8 +13,6 @@ app.use('/orders', require('./routes/orderRoutes'));
 app.use('/categories', require('./routes/categoryRoutes'));
 // app.use('/productOrders', require('./routes/productOrderRoutes'));
 
-//FALTAN LOS DE AUTH (CUANDO TOQUE)
-
 app.listen(PORT, () => {
   console.log(`Servidor en ejecución en el puerto http://localhost:${PORT}`);
 });
