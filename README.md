@@ -1,4 +1,4 @@
-# Proyecto de Backend para Tienda Online (E-commerce)
+# SequelizeProyect
 
 ## Introducción
 
@@ -88,7 +88,7 @@ sequelize db:create
 sequelize db:migrate
 ```
 
-5. Lanzamos los seeders para tener datos 
+5. Lanzamos los seeders para tener datos
 
 ```bash
 sequelize db:seed:all
