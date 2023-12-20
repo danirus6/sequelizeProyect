@@ -1,1 +1,0 @@
-https://www.weblearningblog.com/nodejs/simple-login-and-registration-with-expressjs-sequelize-bcrypt-and-jwt/
