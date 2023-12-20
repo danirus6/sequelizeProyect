@@ -6,7 +6,6 @@ const OrderController = {
     try {
       const orders = await Order.findAll({
         include: [{ model: Product, attributes: ["productName"], through: { attributes: [] } }],
-
       });
       res.send(orders);
     } catch (error) {
@@ -26,7 +25,7 @@ const OrderController = {
       .then(order => {
         order.addProduct(req.body.productId)
         res.status(201).send({ message: 'Orden creada con éxito', order })
-      })      
+      })
       .catch(error => {
         console.error(error);
         res.status(500).send('Error al crear orden');

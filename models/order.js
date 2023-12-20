@@ -12,17 +12,17 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Order.belongsTo(models.User, {
-        foreignKey: 'userId',
         onDelete: 'CASCADE',
       });
       Order.belongsToMany(models.Product, {
-        through: 'ProductsOrder'});
+        through: 'ProductsOrder'
+      });
     }
   }
   Order.init({
     orderDate: DataTypes.DATE,
     totalAmount: DataTypes.DECIMAL,
-    userId: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Order',

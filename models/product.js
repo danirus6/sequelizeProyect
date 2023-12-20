@@ -11,22 +11,19 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Product.belongsTo(models.Category, {
-        foreignKey: 'categoryId',
-        onDelete: 'CASCADE',
-      });
+      Product.belongsTo(models.Category);
       Product.belongsToMany(models.Order, {
-        through: 'ProductsOrder'});
+        through: 'ProductsOrder'
+      });
     }
   }
   Product.init({
     productName: DataTypes.STRING,
     price: DataTypes.DECIMAL,
-    categoryId: DataTypes.INTEGER
+    CategoryId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Product',
-    primaryKey: 'id', 
+    modelName: 'Product'
   });
   return Product;
 };

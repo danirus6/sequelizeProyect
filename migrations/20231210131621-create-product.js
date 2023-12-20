@@ -15,7 +15,7 @@ module.exports = {
       price: {
         type: Sequelize.DECIMAL
       },
-      categoryId: {
+      CategoryId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

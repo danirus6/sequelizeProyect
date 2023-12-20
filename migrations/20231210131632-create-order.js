@@ -15,7 +15,7 @@ module.exports = {
       totalAmount: {
         type: Sequelize.DECIMAL
       },
-      userId: {
+      UserId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

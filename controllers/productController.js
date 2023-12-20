@@ -1,15 +1,15 @@
 const { Product, Category } = require('../models/index.js');
 const { Op } = require('sequelize');
 const ProductController = {
-  
+
   getAll(req, res) {
-  Product.findAll()
-    .then(products => res.status(200).json(products))
-    .catch(error => {
-      console.error(error);
-      res.status(500).json({ error: error.message }); 
-    });
-},
+    Product.findAll()
+      .then(products => res.status(200).json(products))
+      .catch(error => {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+      });
+  },
 
   findById(req, res) {
     Product.findByPk(req.params.id)
@@ -21,36 +21,36 @@ const ProductController = {
   },
 
   findByName(req, res) {
-  const productName = req.params.productName;
-  Product.findAll({
-    where: {
-      productName: {
-        [Op.like]: `%${productName}%` 
+    const productName = req.params.productName;
+    Product.findAll({
+      where: {
+        productName: {
+          [Op.like]: `%${productName}%`
+        }
       }
-    }
-  })
-    .then(products => res.status(200).json(products))
-    .catch(error => {
-      console.error(error);
-      res.status(500).send('Error al obtener productos por nombre');
-    });
-},
+    })
+      .then(products => res.status(200).json(products))
+      .catch(error => {
+        console.error(error);
+        res.status(500).send('Error al obtener productos por nombre');
+      });
+  },
 
   findByPrice(req, res) {
-  const { price } = req.params;
+    const { price } = req.params;
 
-  Product.findAll({
-    where: {
-      price: parseFloat(price),
-    },
-  })
-    .then(products => res.status(200).json(products))
-    .catch(error => {
-      console.error(error);
-      res.status(500).send('Error al obtener productos por precio');
-    });
-},
- async getAllWithCategory(req, res) {
+    Product.findAll({
+      where: {
+        price: parseFloat(price),
+      },
+    })
+      .then(products => res.status(200).json(products))
+      .catch(error => {
+        console.error(error);
+        res.status(500).send('Error al obtener productos por precio');
+      });
+  },
+  async getAllWithCategory(req, res) {
     try {
       const productsWithCategories = await Product.findAll({
         include: [{
@@ -66,17 +66,17 @@ const ProductController = {
     }
   },
 
-async getAllOrdered(req, res) {
-  try {
-    const products = await Product.findAll({
-      order: [['price', 'DESC']],
-    });
-    res.send(products);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error.message, stack: error.stack });
-  }
-},
+  async getAllOrdered(req, res) {
+    try {
+      const products = await Product.findAll({
+        order: [['price', 'DESC']],
+      });
+      res.send(products);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: error.message, stack: error.stack });
+    }
+  },
 
 
   create(req, res) {
@@ -85,9 +85,9 @@ async getAllOrdered(req, res) {
     // if (!req.user) {
     //   return res.status(401).send('No estás autenticado');
     // }
-     if (!productName || !price || !categoryId) {
-    return res.status(400).send('Faltan datos obligatorios para crear el producto');
-  }
+    if (!productName || !price || !categoryId) {
+      return res.status(400).send('Faltan datos obligatorios para crear el producto');
+    }
 
     Product.create({
       productName,
@@ -102,7 +102,7 @@ async getAllOrdered(req, res) {
   },
 
   update(req, res) {
-    
+
 
     const productId = req.params.id;
     const { productName, price, categoryId } = req.body;
