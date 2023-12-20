@@ -4,10 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
-var app = express();
+// Middleware para parsear JSON
+app.use(express.json());
+
+// Conectar las rutas
+app.use('/users', require('./routes/userRoutes'));
+app.use('/products', require('./routes/productRoutes'));
+app.use('/orders', require('./routes/orderRoutes'));
+app.use('/categories', require('./routes/categoryRoutes'));
+// app.use('/productOrders', require('./routes/productOrderRoutes'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

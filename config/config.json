@@ -5,7 +5,8 @@
     "database": "databaseSequelize",
     "host": "127.0.0.1",
     "port": "3306",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "jwt_secret": "ruka"
   },
   "test": {
     "username": "root",

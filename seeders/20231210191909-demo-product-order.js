@@ -5,9 +5,9 @@ module.exports = {
   async up (queryInterface, Sequelize) {
    await queryInterface.bulkInsert('ProductsOrders', [
       {
-        orderId: 1, // Ajusta según las órdenes existentes
-        productId: 1, // Ajusta según los productos existentes
-        quantity: 2,
+        orderId: 2, // Ajusta según las órdenes existentes
+        productId: 2, // Ajusta según los productos existentes
+        quantity: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -17,4 +17,4 @@ module.exports = {
   async down (queryInterface, Sequelize) {
         await queryInterface.bulkDelete('ProductsOrders', null, {});
   }
-};
+}; 
