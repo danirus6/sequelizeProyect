@@ -4,7 +4,7 @@
     "password": "Hellelo12343",
     "database": "databaseSequelize",
     "host": "127.0.0.1",
-    "port": "6666",
+    "port": "3306",
     "dialect": "mysql",
     "jwt_secret": "ruka"
   },

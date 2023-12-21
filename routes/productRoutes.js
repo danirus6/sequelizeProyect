@@ -3,7 +3,6 @@ const router = express.Router();
 const ProductController = require('../controllers/productController');
 const { authentication } = require('../middlewares/authentication')
 
-// Ruta para la creación de productos
 router.post('/create', authentication, ProductController.create);
 router.put('/update/:id', authentication, ProductController.update);
 router.delete('/delete/:id', authentication, ProductController.delete);

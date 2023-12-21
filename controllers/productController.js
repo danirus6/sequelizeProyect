@@ -131,9 +131,6 @@ const ProductController = {
   },
 
   delete(req, res) {
-    // if (!req.user) {
-    //   return res.status(401).send('No estás autenticado');
-    // }
     const productId = req.params.id;
 
     Product.findByPk(productId)
@@ -142,9 +139,6 @@ const ProductController = {
           return res.status(404).send('Producto no encontrado');
         }
 
-        // if (product.userId !== req.user.id) {
-        //   return res.status(403).send('No tienes permisos para eliminar este producto');
-        // }
 
         return product.destroy();
       })

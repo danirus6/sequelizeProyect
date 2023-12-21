@@ -6,7 +6,6 @@ const CategoryController = {
 
   create(req, res) {
     const { categoryName, description } = req.body;
-
     
     Category.create({
       categoryName,
