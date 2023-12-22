@@ -100,4 +100,8 @@ sequelize db:seed:all
 npm start
 ```
 
-7. Utilizamos postman
+7. Utilizamos localhost con postman para probar los endpoints
+
+
+## Autores
+Adrian y Dani
