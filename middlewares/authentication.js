@@ -4,51 +4,51 @@ const { Op } = Sequelize;
 
 const jwt = require('jsonwebtoken');
 
-const {jwt_secret} = require('../config/config.json')['development']
+const { jwt_secret } = require('../config/config.json')['development']
 
-const authentication = async(req, res, next) => {
+const authentication = async (req, res, next) => {
 
-try {
+    try {
 
-const token = req.headers.authorization;
+        const token = req.headers.authorization;
 
-const payload = jwt.verify(token, jwt_secret);
+        const payload = jwt.verify(token, jwt_secret);
 
-const user = await User.findByPk(payload.id);
+        const user = await User.findByPk(payload.id);
 
-const tokenFound = await Token.findOne({
+        const tokenFound = await Token.findOne({
 
-where: {
+            where: {
 
-[Op.and]: [
+                [Op.and]: [
 
-{ UserId: user.id },
+                    { UserId: user.id },
 
-{ token: token }
+                    { token: token }
 
-]
+                ]
 
-}
+            }
 
-});
+        });
 
-if (!tokenFound) {
+        if (!tokenFound) {
 
-return res.status(401).send({ message: 'No estas autorizado' });
+            return res.status(401).send({ message: 'No estas autorizado' });
 
-}
+        }
 
-req.user = user;
+        req.user = user;
 
-next();
+        next();
 
-} catch (error) {
+    } catch (error) {
 
-console.log(error)
+        console.log(error)
 
-res.status(500).send({ error, message: 'Ha habido un problema con el token' })
+        res.status(500).send({ error, message: 'Ha habido un problema con el token' })
 
-}
+    }
 
 }
 

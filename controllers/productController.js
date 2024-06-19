@@ -81,10 +81,6 @@ const ProductController = {
 
   create(req, res) {
     const { productName, price, categoryId } = req.body;
-
-    // if (!req.user) {
-    //   return res.status(401).send('No estás autenticado');
-    // }
     if (!productName || !price || !categoryId) {
       return res.status(400).send('Faltan datos obligatorios para crear el producto');
     }
